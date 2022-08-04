@@ -22,6 +22,10 @@ line_bot_api = LineBotApi(lineaccesstoken)
 def index():
     return "Hello Worl"
 
+@app.route('/testpush')
+def testpush():
+    line_bot_api.push_message('R7f82bdcc51fa937aefe866ab42e68d8c', TextSendMessage(text='Mixser ทดสอบการส่ง'))
+    return '',200
 
 @app.route('/webhook', methods=['POST'])
 def callback():
@@ -77,6 +81,7 @@ def handle_text(inpmessage):
         flex = flexmessage(inpmessage)
         flex = json.loads(flex)
         replyObj = FlexSendMessage(alt_text='Flex Message alt text', contents=flex)
+    
     else:
         replyObj = FlexSendMessage(text=inpmessage)
     return replyObj
