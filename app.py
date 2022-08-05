@@ -62,7 +62,7 @@ def testpush():
     flex = flexmessage()
     flex = json.loads(flex)
     replyObj = FlexSendMessage(alt_text='Flex Message alt text', contents=flex)
-    line_bot_api.push_message('R7f82bdcc51fa937aefe866ab42e68d8c', replyObj)
+    line_bot_api.push_message('R7f82bdcc51fa937aefe866ab42e68d8c','https://liff.line.me/1657363028-G2MgkyYb')
     return '',200
 
 @app.route('/webhook', methods=['POST'])
