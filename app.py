@@ -11,6 +11,10 @@ import requests
 
 from PIL import Image
 import warnings
+
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+
 warnings.simplefilter('error', Image.DecompressionBombWarning)
 
 from linebot.models import (
@@ -26,6 +30,7 @@ bootstrap = Bootstrap(app)
 
 lineaccesstoken = 'gyBAJgxWYGkpKNPDnsuhmW4veeCqOO9kzPv5SGNkhaysTCWXEFwVCtYWGQFstVaaKMGoSoFU/T3PyHrejvHQUzjTQZ/kfKRh06zwfksY9wPlvKPznqom5N0exYWU/aMJU4c9OdMXgbKpczOg6TpTvgdB04t89/1O/w1cDnyilFU='
 line_bot_api = LineBotApi(lineaccesstoken)
+
 
 ####################### new ########################
 
@@ -123,5 +128,12 @@ def handle_text(inpmessage):
     else:
         replyObj = FlexSendMessage(text=inpmessage)
     return replyObj
+
+def connect_googlesheet():
+    scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
+    cerds = ServiceAccountCredentials.from_json_keyfile_name("apipython-357807-1e6b7744a8c4.json", scope)
+    client = gspread.authorize(cerds)
+    return client
 if __name__ == '__main__':
     app.run(debug=True)
+    google_client=connect_googlesheet()

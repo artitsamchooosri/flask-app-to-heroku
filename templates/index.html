@@ -30,16 +30,13 @@
       type: 'POST',
       url: '/saveimage',
       data: {
-        'image': signaturePad.toDataURL('image/jpeg')
+        'image': signaturePad.toDataURL('image/jpeg'),
+        'LT' : latt,
+        'LO' : long
       },
       success: function (res, status) {
         liff.getProfile().then(function (profile) {
           liff.sendMessages([
-            {
-              type: 'image',
-              originalContentUrl: 'https://' + document.domain + '/imgs/' + res + '.jpg',
-              previewImageUrl: 'https://' + document.domain + '/imgs/' + res + '_240.jpg'
-            },
             {
               type: 'text',
               text: 'From:' + profile.displayName
@@ -72,8 +69,8 @@
   }
   
   function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude;
+    var latt=position.coords.latitude;
+    var long=position.coords.longitude;
   }
   </script>
 {% endblock %}
