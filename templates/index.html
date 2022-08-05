@@ -7,9 +7,6 @@
 {% block scripts %}
 {{super()}}
   <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
-  <script type="text/javascript">
-    window.onload = getLocation();
-  </script>
   <script>
     const canvas = document.querySelector('#canvas');
     const signaturePad = new SignaturePad(canvas, {
@@ -20,6 +17,7 @@
       canvas.setAttribute('width', $('.container').width());
       canvas.setAttribute('height', window.innerHeight - $('#btn').outerHeight() - 10);
       signaturePad.clear();
+      getLocation();
       liff.init(function (data) {});
     });
   </script>
