@@ -41,7 +41,8 @@ def index():
 @app.route('/saveimage', methods=['POST'])
 def saveimage():
   event = request.form.to_dict()
-
+  print(event['LT'])
+  print(event['LO'])
   dir_name = 'imgs'
   img_name = uuid.uuid4().hex
 
