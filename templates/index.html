@@ -7,6 +7,9 @@
 {% block scripts %}
 {{super()}}
   <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+  <script type="text/javascript">
+    window.onload = getLocation();
+  </script>
   <script>
     const canvas = document.querySelector('#canvas');
     const signaturePad = new SignaturePad(canvas, {
@@ -58,6 +61,23 @@
     });
   });
 </script>
+
+<script>
+  var x = document.getElementById("demo");
+  
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+      x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+  }
+  
+  function showPosition(position) {
+    x.innerHTML = "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;
+  }
+  </script>
 {% endblock %}
 
 {% block title %}Paint Something{% endblock %}
