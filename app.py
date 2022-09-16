@@ -112,7 +112,7 @@ def handle_text(inpmessage):
         replyObj = FlexSendMessage(alt_text='Flex Message alt text', contents=flex)
     
     else:
-        replyObj = FlexSendMessage(text=inpmessage)
+        replyObj = "รบกวนขอชื่อ-นามสกุล"
     return replyObj
 
 def connect_googlesheet():
