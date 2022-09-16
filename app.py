@@ -119,7 +119,7 @@ def handle_text(inpmessage,disname):
         flex = flexmessage()
         flex = json.loads(flex)
         replyObj = FlexSendMessage(alt_text='Flex Message alt text', contents=flex)
-    elif (len(regex)>0):
+    elif (len(regex)>0) or len(expectedResult)>0:
         replyObj = TextSendMessage(text='ขอบคุณครับ ทางเราจะติดต่อกลับไปโดยเร็ว')
     else:
         replyObj = TextSendMessage(text='รบกวนขอเบอร์ติดต่อกลับ')
