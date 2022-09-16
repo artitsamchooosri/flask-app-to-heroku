@@ -71,6 +71,8 @@ def event_handle(event):
     print(event)
     try:
         userId = event['source']['userId']
+        disname = line_bot_api.get_profile(userId).display_name
+        print(disname)
     except:
         print('error cannot get userId')
         return ''
