@@ -108,7 +108,7 @@ def flexmessage():
 def handle_text(inpmessage):
     regex = re.compile(pattern = r'\d\d\d-?\d\d\d-?\d\d\d\d')
     regex = regex.findall(inpmessage)
-    
+    print(data)
     if inpmessage == 'ทดสอบ':
         flex = flexmessage()
         flex = json.loads(flex)
@@ -129,4 +129,4 @@ if __name__ == '__main__':
     google_client=connect_googlesheet()
     sheet = google_client.open("Test_LineBot").sheet1
     data = sheet.get_all_records()
-    print(data)
+    
