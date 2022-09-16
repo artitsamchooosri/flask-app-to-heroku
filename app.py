@@ -11,7 +11,7 @@ import requests
 
 from PIL import Image
 import warnings
-
+import re
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
@@ -106,14 +106,16 @@ def flexmessage():
     flex = '''{"type": "bubble", "size": "giga", "direction": "ltr", "header": {"type": "box", "layout": "vertical", "flex": 0, "spacing": "sm", "contents": [{"type": "box", "layout": "vertical", "contents": [{"type": "text", "text": "CHECK PICKING", "weight": "bold", "align": "center", "gravity": "center", "contents": []}]}, {"type": "box", "layout": "horizontal", "contents": [{"type": "text", "text": "POOL :", "weight": "bold", "contents": []}, {"type": "text", "text": "MCRR", "color": "#2D870DFF", "contents": []}]}, {"type": "box", "layout": "horizontal", "margin": "md", "contents": [{"type": "text", "text": "Work Order:", "weight": "bold", "contents": []}, {"type": "text", "text": "W2206597", "color": "#2D870DFF", "contents": []}]}, {"type": "box", "layout": "vertical", "contents": [{"type": "text", "text": "NAME", "weight": "bold", "contents": []}, {"type": "text", "text": "REAR SPROCKET DAIICHI WAVE100S(428)-35T", "contents": []}]}, {"type": "separator", "margin": "lg", "color": "#0FED10FF"}]}, "body": {"type": "box", "layout": "vertical", "spacing": "md", "contents": [{"type": "box", "layout": "vertical", "spacing": "sm", "contents": [{"type": "box", "layout": "baseline", "contents": [{"type": "text", "text": "LINENUM", "weight": "bold", "size": "md", "color": "#000000FF", "gravity": "center", "margin": "none", "decoration": "underline", "contents": []}, {"type": "text", "text": "ITEMBOM", "weight": "bold", "size": "md", "color": "#000000FF", "gravity": "center", "decoration": "underline", "contents": []}, {"type": "text", "text": "\u0e1b\u0e23\u0e30\u0e21\u0e32\u0e13", "weight": "bold", "color": "#000000FF", "gravity": "center", "decoration": "underline", "contents": []}, {"type": "text", "text": "\u0e15\u0e31\u0e14\u0e08\u0e48\u0e32\u0e22\u0e08\u0e23\u0e34\u0e07", "weight": "bold", "color": "#000000FF", "gravity": "center", "decoration": "underline", "contents": []}, {"type": "text", "text": "\u0e2a\u0e48\u0e27\u0e19\u0e15\u0e48\u0e32\u0e07", "weight": "bold", "color": "#000000FF", "gravity": "center", "decoration": "underline", "contents": []}]}, {"type": "box", "layout": "baseline", "contents": [{"type": "text", "text": "1", "contents": []}, {"type": "text", "text": "3B020011", "contents": []}, {"type": "text", "text": "0.553", "contents": []}, {"type": "text", "text": "0.0", "contents": []}, {"type": "text", "text": "0.553", "contents": []}]}, {"type": "box", "layout": "baseline", "contents": [{"type": "text", "text": "2", "contents": []}, {"type": "text", "text": "3A010106", "contents": []}, {"type": "text", "text": "553.000", "contents": []}, {"type": "text", "text": "553.0", "contents": []}, {"type": "text", "text": "0.000", "contents": []}]}, {"type": "box", "layout": "baseline", "contents": [{"type": "text", "text": "3", "contents": []}, {"type": "text", "text": "xxxxxxx", "contents": []}, {"type": "text", "text": "553.000", "contents": []}, {"type": "text", "text": "553.0", "contents": []}, {"type": "text", "text": "0.000", "contents": []}]}]}, {"type": "text", "text": "\u0e15\u0e23\u0e27\u0e08\u0e2a\u0e2d\u0e1a\u0e01\u0e32\u0e23\u0e15\u0e31\u0e14\u0e08\u0e48\u0e32\u0e22\u0e27\u0e31\u0e15\u0e16\u0e38\u0e14\u0e34\u0e1a", "size": "xxs", "color": "#AAAAAA", "wrap": true, "contents": []}]}}'''
     return flex
 def handle_text(inpmessage):
-    
+    regex = re.compile(pattern = r'\d\d\d-?\d\d\d-?\d\d\d\d')
+    regex = regex.findall(inpmessage)
+    print(len(regex))
     if inpmessage == 'ทดสอบ':
         flex = flexmessage()
         flex = json.loads(flex)
         replyObj = FlexSendMessage(alt_text='Flex Message alt text', contents=flex)
     
     else:
-        replyObj = TextSendMessage(text='รบกวนขอชื่อ-นามสกุล')
+        replyObj = TextSendMessage(text='รบกวนขอเบอร์ติดต่อกลับ')
     return replyObj
 
 def connect_googlesheet():
