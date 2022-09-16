@@ -66,7 +66,6 @@ def callback():
         event = decoded['events'][i]
         event_handle(event)
     return '',200
-#fdsd
 
 def event_handle(event):
     print(event)
@@ -112,7 +111,7 @@ def handle_text(inpmessage):
         replyObj = FlexSendMessage(alt_text='Flex Message alt text', contents=flex)
     
     else:
-        replyObj = "รบกวนขอชื่อ-นามสกุล"
+        replyObj = TextSendMessage(text='รบกวนขอชื่อ-นามสกุล')
     return replyObj
 
 def connect_googlesheet():
