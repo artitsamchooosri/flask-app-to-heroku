@@ -32,6 +32,7 @@ lineaccesstoken = 'gyBAJgxWYGkpKNPDnsuhmW4veeCqOO9kzPv5SGNkhaysTCWXEFwVCtYWGQFst
 line_bot_api = LineBotApi(lineaccesstoken)
 
 
+
 ####################### new ########################
 
 @app.route('/')
@@ -108,6 +109,9 @@ def flexmessage():
 def handle_text(inpmessage):
     regex = re.compile(pattern = r'\d\d\d-?\d\d\d-?\d\d\d\d')
     regex = regex.findall(inpmessage)
+    google_client=connect_googlesheet()
+    sheet = google_client.open("Test_LineBot").sheet1
+    data = sheet.get_all_records()
     print(data)
     if inpmessage == 'ทดสอบ':
         flex = flexmessage()
@@ -126,7 +130,5 @@ def connect_googlesheet():
     return client
 if __name__ == '__main__':
     app.run(debug=True)
-    google_client=connect_googlesheet()
-    sheet = google_client.open("Test_LineBot").sheet1
-    data = sheet.get_all_records()
+    
     
