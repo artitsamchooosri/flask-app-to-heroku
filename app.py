@@ -127,3 +127,6 @@ def connect_googlesheet():
 if __name__ == '__main__':
     app.run(debug=True)
     google_client=connect_googlesheet()
+    sheet = google_client.open("Test_LineBot").sheet1
+    data = sheet.get_all_records()
+    print(data)
