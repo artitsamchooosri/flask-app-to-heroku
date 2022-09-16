@@ -108,12 +108,13 @@ def flexmessage():
 def handle_text(inpmessage):
     regex = re.compile(pattern = r'\d\d\d-?\d\d\d-?\d\d\d\d')
     regex = regex.findall(inpmessage)
-    print(len(regex))
+    
     if inpmessage == 'ทดสอบ':
         flex = flexmessage()
         flex = json.loads(flex)
         replyObj = FlexSendMessage(alt_text='Flex Message alt text', contents=flex)
-    
+    elif (len(regex)>0):
+        replyObj = TextSendMessage(text='ขอบคุณครับ ทางเราจะติดต่อกลับไปโดยเร็ว')
     else:
         replyObj = TextSendMessage(text='รบกวนขอเบอร์ติดต่อกลับ')
     return replyObj
