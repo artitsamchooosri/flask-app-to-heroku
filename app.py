@@ -14,6 +14,7 @@ import warnings
 import re
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+from datetime import datetime
 
 warnings.simplefilter('error', Image.DecompressionBombWarning)
 
@@ -114,9 +115,10 @@ def handle_text(inpmessage,disname):
     data = sheet.get_all_records()
     #print(len(data))
     keyValList = [disname]
+    today = datetime.now()
     expectedResult = [d for d in data if d['ID_LINE'] in keyValList]
     if len(regex)>0:
-        insertRow = [disname,regex[0]]
+        insertRow = [disname,regex[0],today]
         sheet.insert_row(insertRow,len(data)+2)
     #print(len(expectedResult))
     if inpmessage == 'ทดสอบ':
