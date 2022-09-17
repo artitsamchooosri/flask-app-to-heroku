@@ -112,6 +112,7 @@ def handle_text(inpmessage,disname):
     google_client=connect_googlesheet()
     sheet = google_client.open("Test_LineBot").sheet1
     data = sheet.get_all_records()
+    print(len(data))
     keyValList = [disname]
     expectedResult = [d for d in data if d['ID_LINE'] in keyValList]
     if len(regex)>0:
