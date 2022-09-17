@@ -114,6 +114,9 @@ def handle_text(inpmessage,disname):
     data = sheet.get_all_records()
     keyValList = [disname]
     expectedResult = [d for d in data if d['ID_LINE'] in keyValList]
+    if len(regex)>0:
+        insertRow = [disname,regex[0]]
+        sheet.insert_row(insertRow)
     print(len(expectedResult))
     if inpmessage == 'ทดสอบ':
         flex = flexmessage()
